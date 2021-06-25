@@ -1,0 +1,6 @@
+# axios tutorial
+https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/
+
+# Warning
+    State updates from the useState() and useReducer() Hooks don't support the second callback argument. 
+    To execute a side effect after rendering, declare it in the component body with useEffect().

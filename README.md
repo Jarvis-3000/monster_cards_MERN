@@ -1,3 +1,32 @@
+# Notes
+
+## axios api tutorial
+[Tutorial link on LogRocket](https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/) 
+
+# axios Methods
+    1. axios.request(config)
+    2. axios.get(url[, config])
+    3. axios.delete(url[, config])
+    4. axios.head(url[, config])
+    5. axios.options(url[, config])
+    6. axios.post(url[, data[, config]])
+    7. axios.put(url[, data[, config]])
+    8. axios.patch(url[, data[, config]])
+
+# Get Method
+    axios.get('https://api.github.com/users/mapbox')
+    .then((response) => {
+        console.log(response.data);
+        console.log(response.status);
+        console.log(response.statusText);
+        console.log(response.headers);
+        console.log(response.config);
+    });
+
+
+
+#
+#
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts

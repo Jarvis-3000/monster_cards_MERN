@@ -1,58 +1,73 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react"
+import axios from "axios"
+import { useState, useEffect } from "react"
+// import { createContext } from "react"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+import useStyles from "./styles.app"
+
+import SearchBox from "./components/searchBox/searchBox"
+import MonsterList from "./components/monsterList/monsterList"
+
+// export const monstersContext=createContext(null)
+
+function App(){
+
+    const classes=useStyles() //styling
+
+    const [monsters, setMonsters]=useState([])
+    const [filterdMonsters, setFilteredMonsters]=useState([])
+    const [searchString, setSearchString]=useState('')
+
+    const handleSearchString=(e)=>{
+        // useState does not support second callback
+        // but for being up to date with state , use prevState just like class lifecycle
+        setSearchString(prevSearchString=>e.target.value)
+        
+    }
+
+    // for frtching the data from api 
+    const fetchData=async ()=>{
+        const response=await axios.get("https://jsonplaceholder.typicode.com/users")
+        setMonsters(response.data)
+        // setMonsters(response.data,(monsters)=>{
+        //     console.log(monsters)
+        // })
+    }
+
+    const handleFilterdMonsters=()=>{
+        let filtered=monsters.filter(monster=>
+            (monster.name.toLowerCase().includes(searchString.toLowerCase())) 
+        )
+        // console.log(filtered)
+        setFilteredMonsters(filtered)
+    }
+
+    useEffect(()=>{
+        fetchData()
+    },[])
+    //never leave second argument emepty else it will cause endless loop
+    // We passed in an empty array to useEffect as the 2nd argument 
+    // so that the callback only runs on component's first load.
+
+
+    useEffect(()=>{
+        console.log("monsters",monsters)
+        handleFilterdMonsters()
+        console.log("filteredMonsters",filterdMonsters)
+    },[monsters, searchString])
+    //second param/[] is callled dependencied
+    //These dependencies specify on which cases useEffect should respond to a component being updated.
+
+ 
+    return (
+        // <monstersContext.Provider value={filterdMonsters} className="app">
+        <div className={classes.app}>
+            <SearchBox handleSearchString={handleSearchString} />
+            <MonsterList monsters={filterdMonsters}/>
+        </div>
+        //  </monstersContext.Provider>
+    )
 }
 
-export default App;
+
+export default App
