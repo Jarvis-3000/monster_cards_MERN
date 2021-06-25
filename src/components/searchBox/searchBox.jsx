@@ -2,6 +2,7 @@ import React from "react"
 
 //material ui modules
 import Typography from "@material-ui/core/Typography"
+import Box from "@material-ui/core/Box"
 // import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import { IconButton } from "@material-ui/core"
@@ -11,6 +12,7 @@ import SaveIcon from '@material-ui/icons/Save'
 // style
 import useStyles from './style.searchBox'
 
+
 function SearchBox({ handleSearchString }) {
 
     const classes = useStyles()
@@ -18,9 +20,60 @@ function SearchBox({ handleSearchString }) {
     return (
         <>
             <Typography
-                style={{ margin: '10px 0px' }}
+                style={{ marginBottom:'10px' }}
                 variant="h3"
-            >Search Monster</Typography>
+                // color="error"
+            >
+                <Box 
+                    style={{ margin:'0px 0px 10px' }} 
+                    bgcolor="primary.main"
+                >
+                    Search Monster
+                </Box>
+                
+                <Box 
+                    style={{ margin:'0px 50px 10px' }} 
+                    bgcolor="secondary.main"
+                >
+                    Search Monster
+                </Box>
+                
+                <Box 
+                    style={{ margin:'0px 100px 10px' }} 
+                    bgcolor="error.main"
+                >
+                    Search Monster
+                </Box>
+                
+                <Box 
+                    style={{ margin:'0px 150px 10px' }} 
+                    bgcolor="info.main"
+                >
+                    Search Monster
+                </Box>
+                
+                <Box 
+                    style={{ margin:'0px 200px 10px' }} 
+                    bgcolor="warning.main"
+                >
+                    Search Monster
+                </Box>
+                
+                <Box 
+                    style={{ margin:'0px 250px 10px' }} 
+                    bgcolor="success.main"
+                >
+                    Search Monster
+                </Box>
+                
+                <Box 
+                    style={{ margin:'0px 300px 10px' }} 
+                    bgcolor="grey.main"
+                >
+                    Search Monster
+                </Box>
+                
+            </Typography>
 
             <div className={classes.searchBox}>
 
@@ -38,7 +91,7 @@ function SearchBox({ handleSearchString }) {
                 <Button
                     href="#"
                     variant="contained"
-                    color="primary"
+                    // color="primary"
                     disableElevation
                     // disableRipple
                     size="large"

@@ -2,25 +2,28 @@ import { makeStyles } from "@material-ui/core"
 
 const useStyles=makeStyles({
     monsterList:{
-        width:'100%',
+        margin:'auto',
+        width:'90%',
         padding:'5px',
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
+        // display: 'flex',
+        // flexWrap: 'wrap',
+        // justifyContent: 'space-between',
+        // alignItems: 'stretch',
+        
     },
     
     monster:{
-        width:'25%',
+        padding:'5px',
+        // width:'300px',
         height:'fitContent',
-        // padding:10px,
-        margin:'10px',
-        backgroundColor: 'rgba(1510, 193, 196, 0.5)',
+        backgroundImage:'linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);',
         border: '2px solid black',
+        borderRadius:'5px',
         display: 'flex',
         flexDirection: 'column',
         wordWrap: 'breakWord',
     }
 })
 
+// background-image: linear-gradient( 109.6deg,  rgba(62,161,219,1) 11.2%, rgba(93,52,236,1) 100.2% );
 export default useStyles

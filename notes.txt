@@ -5,3 +5,9 @@ https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/
     State updates from the useState() and useReducer() Hooks don't support the second callback argument. 
     To execute a side effect after rendering, declare it in the component body with useEffect().
 
+# Confusion1
+    I having problems in accessing colors
+    Suppose I want to change button color then I can only use 2 colors (primary and secondary)
+    * no colors from (error, warning, info)
+
+    These colors are only accessible in <Box bgcolor="warning.main"></Box> component in primary.main format

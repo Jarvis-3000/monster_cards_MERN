@@ -2,18 +2,18 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
     searchBox:{
-        margin:'auto',
+        margin:'50px auto',
         width:'fit-content',
         padding:'20px 40px 10px 40px',
         border:'1px solid black',
         borderRadius:'5px',
-        backgroundColor:'rgba(1510, 193, 196, 0.3)'
+        backgroundColor:`rgba(119, 121, 121,.5)`
     },
     input: {
       display: 'none',
     },
     inputBox:{
-        color:'white',
+        // color:'white',
         margin: '10px 0px',
         padding:'10px 10px', 
         width: '100%',
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
         borderColor:'white',
         borderRadius:'5px',
         outline:'none',
-        backgroundColor:'rgba(0,0,0,0)'
+        // backgroundColor:'rgba(0,0,0,0)'
     },
     btn:{
         backgroundColor:'orange',

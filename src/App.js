@@ -1,14 +1,55 @@
 import React from "react"
 import axios from "axios"
 import { useState, useEffect } from "react"
-// import { createContext } from "react"
-
+import { createMuiTheme, ThemeProvider } from "@material-ui/core"
+//styles
 import useStyles from "./styles.app"
 
 import SearchBox from "./components/searchBox/searchBox"
 import MonsterList from "./components/monsterList/monsterList"
 
-// export const monstersContext=createContext(null)
+
+const Theme=createMuiTheme({
+    palette:{
+        primary:{
+            main:'#6A287E'
+        },
+        secondary:{
+            main:'#03c03c'
+        },
+        warning:{
+            main:'#FF8040'
+        },
+        error:{
+            main:'#FF0000'
+        },
+        info:{
+            main:'#306EFF'
+        },
+        success:{
+            main:'#6CC417'
+        },
+        grey:{
+            main:'#848482'
+        }
+
+    },
+    typography:{
+        // fontFamily:'Indie Flower, cursive',
+        // fontFamily: 'Amatic SC, cursive',
+        fontFamily: 'Oswald,  cursive',
+        // fontSize: 14,
+        fontWeightLight: 300,
+        fontWeightRegular: 400,
+        fontWeightMedium: 500,
+        fontWeightBold: 700,
+    },
+    shape:{
+        borderRadius: 5
+    }
+
+})
+
 
 function App(){
 
@@ -60,12 +101,12 @@ function App(){
 
  
     return (
-        // <monstersContext.Provider value={filterdMonsters} className="app">
-        <div className={classes.app}>
-            <SearchBox handleSearchString={handleSearchString} />
-            <MonsterList monsters={filterdMonsters}/>
-        </div>
-        //  </monstersContext.Provider>
+        <ThemeProvider theme={Theme}>
+            <div className={classes.app}>
+                <SearchBox handleSearchString={handleSearchString} />
+                <MonsterList monsters={filterdMonsters}/>
+            </div>
+        </ThemeProvider>
     )
 }
 
