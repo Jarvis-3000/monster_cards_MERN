@@ -13,26 +13,7 @@ const Theme=createMuiTheme({
     palette:{
         primary:{
             main:'#6A287E'
-        },
-        secondary:{
-            main:'#03c03c'
-        },
-        warning:{
-            main:'#FF8040'
-        },
-        error:{
-            main:'#FF0000'
-        },
-        info:{
-            main:'#306EFF'
-        },
-        success:{
-            main:'#6CC417'
-        },
-        grey:{
-            main:'#848482'
         }
-
     },
     typography:{
         // fontFamily:'Indie Flower, cursive',

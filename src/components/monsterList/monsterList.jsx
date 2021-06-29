@@ -1,43 +1,57 @@
-import React
-    from "react"
-// import { monstersContext } from "../../app"
+import React, {useState, useEffect} from "react"
 
 // styles
 import useStyles from "./style.monsterList"
 
 //material ui modules
-import Typography from "@material-ui/core/Typography"
-import Box from "@material-ui/core/Box"
+import {Grid, Fab, Paper, Box, Typography} from "@material-ui/core"
+import EditIcon from "@material-ui/icons/Edit"
 
-import Grid from "@material-ui/core/Grid"
-import { Paper } from "@material-ui/core"
+import FormDialog from "../formDialog/formDialog"
 
 
 function MonsterList(props) {
-    // const monsters=useContext(monstersContext)
+    const classes = useStyles()   //for getting all the style
 
-    const classes = useStyles()   //for getting all the styles
+    const [monsters, setMonsters]=useState([])
 
-    const monsters = props.monsters
+    useEffect(()=>{
+        setMonsters(props.monsters)
+        console.log("ok")
+    },[props.monsters])
+
+    function handleEdit(id,input){
+        let newMonsters=monsters.map(monster=>{
+            if(monster.id===id){
+                monster.name=input
+            }
+            return monster
+        })
+        setMonsters(newMonsters)
+    }
+
     return (
         <Grid container spacing={3} className={classes.monsterList}>
             {
                 monsters.map(monster => {
                     return (
-                        <Grid item xl={2} lg={3} md={4} sm={6} xs={12}>
-                            <Paper key={monster.id} className={classes.monster}>
+                        <Grid item xl={2} lg={3} md={4} sm={6} xs={12} key={monster.id}>
+                            <Paper className={classes.monster}>
                                 <img width="100%" height="100%" src={`https://robohash.org/${monster.id}?set=set2`} alt="monsterImage" />
-                                <Typography
-                                    variant="button"
-                                    // color="primary" 
-                                    // gutterBottom
-                                    align="center"
-                                    display="block"
-                                >
-                                    <Box paddingTop='10px' gutterBottom>
-                                        {monster.name}
-                                    </Box>
-                                </Typography>
+
+                                <Grid container direction="row" justify="space-between" alignItems="center" style={{ padding: '10px' }}>
+                                    <Grid item xs>
+                                        <Typography variant="h6" align="center" display="block">
+                                            <Box  gutterBottom>
+                                                {monster.name}
+                                            </Box>
+                                        </Typography>
+                                    </Grid>
+
+                                    <Grid item>
+                                        <FormDialog id={monster.id} handleEdit={handleEdit}/>
+                                    </Grid>
+                                </Grid>
                             </Paper>
                         </Grid>
                     )

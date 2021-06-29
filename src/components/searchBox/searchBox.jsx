@@ -25,50 +25,43 @@ function SearchBox({ handleSearchString }) {
                 // color="error"
             >
                 <Box 
-                    style={{ margin:'0px 0px 10px' }} 
+                    style={{ margin:'0px 0px 10px' , fontSize:"70px"}} 
                     bgcolor="primary.main"
                 >
                     Search Monster
                 </Box>
                 
-                <Box 
-                    style={{ margin:'0px 50px 10px' }} 
+                <Box
+                    style={{ margin:'0px 50px 10px' , fontSize:"60px" }} 
                     bgcolor="secondary.main"
                 >
                     Search Monster
                 </Box>
                 
                 <Box 
-                    style={{ margin:'0px 100px 10px' }} 
+                    style={{ margin:'0px 100px 10px' , fontSize:"50px" }} 
                     bgcolor="error.main"
                 >
                     Search Monster
                 </Box>
                 
                 <Box 
-                    style={{ margin:'0px 150px 10px' }} 
+                    style={{ margin:'0px 150px 10px' , fontSize:"40px" }} 
                     bgcolor="info.main"
                 >
                     Search Monster
                 </Box>
                 
                 <Box 
-                    style={{ margin:'0px 200px 10px' }} 
+                    style={{ margin:'0px 200px 10px' , fontSize:"30px" }} 
                     bgcolor="warning.main"
                 >
                     Search Monster
                 </Box>
                 
                 <Box 
-                    style={{ margin:'0px 250px 10px' }} 
+                    style={{ margin:'0px 250px 10px' , fontSize:"20px" }} 
                     bgcolor="success.main"
-                >
-                    Search Monster
-                </Box>
-                
-                <Box 
-                    style={{ margin:'0px 300px 10px' }} 
-                    bgcolor="grey.main"
                 >
                     Search Monster
                 </Box>
