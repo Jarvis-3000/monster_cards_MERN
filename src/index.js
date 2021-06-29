@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch, Link } from "react-router-dom"
 // import '@fontsource/roboto'
 
 // components
-import App from "./app"
+import App from "./App"
 import ColorPicker from "./components/colorPicker/colorPicker"
 import Header from "./components/header/header"
 //styles
