@@ -51,9 +51,6 @@ function App(){
     const fetchData=async ()=>{
         const response=await axios.get("https://jsonplaceholder.typicode.com/users")
         setMonsters(response.data)
-        // setMonsters(response.data,(monsters)=>{
-        //     console.log(monsters)
-        // })
     }
 
     const handleFilterdMonsters=()=>{
