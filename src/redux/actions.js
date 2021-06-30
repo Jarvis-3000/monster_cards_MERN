@@ -1,37 +1,34 @@
-import * as actionTypes from "./actionsTypes"
+import * as actionTypes from "./actionTypes"
+import axios from "axios"
 
 export const editName=(payload)=>{
     return (dispatch)=>{
         console.log("editing...")
         //editing execution...
-        return dispatch({type:actionTypes.editName, payload})
+        return dispatch({type:actionTypes.EDIT_NAME, payload})
     }
 }
 
 export const toggleSignin=(payload)=>{
     return{
-        type:actionTypes.toggleSignin,
+        type:actionTypes.TOGGLE_SIGNIN,
         payload
     }
 }
 
-export const fetchDataRequest=()=>{
-    return{
-        type:actionTypes.fetchDataRequest
-    }
-}
+export const addUsers=()=>{
+    return function(dispatch){
+        dispatch({type:actionTypes.FETCH_USERS_REQUEST})
 
-export const fetchDataSuccess=(payload)=>{
-    return{
-        type:actionTypes.fetchDataSuccess,
-        payload
-    }
-}
-
-export const fetchDataFailed=(payload)=>{
-    return{
-        type:actionTypes.fetchDataFailed,
-        payload
+        //fetching execution...
+        axios.get("https://jsonplaceholder.typicode.com/users")
+        .then(users=>{
+            console.log(users.data)
+            return dispatch({type:actionTypes.FETCH_USERS_SUCCESS, payload:users.data})
+        })
+        .catch(err=>{
+            return dispatch({type:actionTypes.FETCH_USERS_FAILED, payload:err })
+        })
     }
 }
 

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react"
+import { useSelector, useDispatch } from "react-redux"
 
 // styles
 import useStyles from "./style.monsterList"
@@ -7,33 +8,35 @@ import useStyles from "./style.monsterList"
 import {Grid, Fab, Paper, Box, Typography} from "@material-ui/core"
 import EditIcon from "@material-ui/icons/Edit"
 
+//component
 import FormDialog from "../formDialog/formDialog"
 
 
 function MonsterList(props) {
     const classes = useStyles()   //for getting all the style
 
-    const [monsters, setMonsters]=useState([])
+    const {monsters, fetchState}=useSelector(state=>state)
+    const [monsters2, setMonsters]=useState([])
 
     useEffect(()=>{
-        setMonsters(props.monsters)
+        setMonsters(monsters)
         console.log("ok")
-    },[props.monsters])
+    },[monsters])
 
-    function handleEdit(id,input){
-        let newMonsters=monsters.map(monster=>{
-            if(monster.id===id){
-                monster.name=input
-            }
-            return monster
-        })
-        setMonsters(newMonsters)
-    }
+    // function handleEdit(id,input){
+    //     let newMonsters=monsters.map(monster=>{
+    //         if(monster.id===id){
+    //             monster.name=input
+    //         }
+    //         return monster
+    //     })
+    //     setMonsters(newMonsters)
+    // }
 
     return (
         <Grid container spacing={3} className={classes.monsterList}>
             {
-                monsters.map(monster => {
+                monsters2.map(monster => {
                     return (
                         <Grid item xl={2} lg={3} md={4} sm={6} xs={12} key={monster.id}>
                             <Paper className={classes.monster}>
@@ -49,7 +52,9 @@ function MonsterList(props) {
                                     </Grid>
 
                                     <Grid item>
-                                        <FormDialog id={monster.id} handleEdit={handleEdit}/>
+                                        <FormDialog id={monster.id} 
+                                            // handleEdit={handleEdit}
+                                        />
                                     </Grid>
                                 </Grid>
                             </Paper>

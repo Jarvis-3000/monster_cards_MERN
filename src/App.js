@@ -1,6 +1,8 @@
 import React from "react"
-import axios from "axios"
 import { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import * as actions from "./redux/actions"
+
 import { createMuiTheme, ThemeProvider } from "@material-ui/core"
 //styles
 import useStyles from "./styles.app"
@@ -35,45 +37,43 @@ const Theme=createMuiTheme({
 function App(){
 
     const classes=useStyles() //styling
+    const dispatch=useDispatch()           //useDispatchh() for dispatching an action
 
-    const [monsters, setMonsters]=useState([])
-    const [filterdMonsters, setFilteredMonsters]=useState([])
-    const [searchString, setSearchString]=useState('')
+    const [monsters2, setMonsters]=useState([])
+    // const [filterdMonsters, setFilteredMonsters]=useState([])
+    // const [searchString, setSearchString]=useState('')
 
-    const handleSearchString=(e)=>{
-        // useState does not support second callback
-        // but for being up to date with state , use prevState just like class lifecycle
-        setSearchString(prevSearchString=>e.target.value)
+    // const handleSearchString=(e)=>{
+    //     // useState does not support second callback
+    //     // but for being up to date with state , use prevState just like class lifecycle
+    //     setSearchString(prevSearchString=>e.target.value)
         
-    }
+    // }
 
     // for frtching the data from api 
-    const fetchData=async ()=>{
-        const response=await axios.get("https://jsonplaceholder.typicode.com/users")
-        setMonsters(response.data)
-    }
 
-    const handleFilterdMonsters=()=>{
-        let filtered=monsters.filter(monster=>
-            (monster.name.toLowerCase().includes(searchString.toLowerCase())) 
-        )
-        // console.log(filtered)
-        setFilteredMonsters(filtered)
-    }
+    // const handleFilterdMonsters=()=>{
+    //     let filtered=monsters2.filter(monster=>
+    //         (monster.name.toLowerCase().includes(searchString.toLowerCase())) 
+    //     )
+    //     // console.log(filtered)
+    //     setFilteredMonsters(filtered)
+    // }
 
     useEffect(()=>{
-        fetchData()
+        console.log("dispatching addUsers")
+        dispatch(actions.addUsers())
     },[])
     //never leave second argument emepty else it will cause endless loop
     // We passed in an empty array to useEffect as the 2nd argument 
     // so that the callback only runs on component's first load.
 
 
-    useEffect(()=>{
-        console.log("monsters",monsters)
-        handleFilterdMonsters()
-        console.log("filteredMonsters",filterdMonsters)
-    },[monsters, searchString])
+    // useEffect(()=>{
+    //     console.log("monsters",monsters2)
+    //     // handleFilterdMonsters()
+    //     // console.log("filteredMonsters",filterdMonsters)
+    // },[monsters2, searchString])
     //second param/[] is callled dependencied
     //These dependencies specify on which cases useEffect should respond to a component being updated.
 
@@ -81,8 +81,9 @@ function App(){
     return (
         <ThemeProvider theme={Theme}>
             <div className={classes.app}>
-                <SearchBox handleSearchString={handleSearchString} />
-                <MonsterList monsters={filterdMonsters}/>
+                {/* <SearchBox handleSearchString={handleSearchString} /> */}
+                {/* <MonsterList monsters={filterdMonsters}/> */}
+                <MonsterList monsters={monsters2}/>
             </div>
         </ThemeProvider>
     )
