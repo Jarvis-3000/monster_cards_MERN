@@ -19,7 +19,7 @@ function LoginPage() {
     }
 
     return (
-        <Grid container justify="center" alignItems="center">
+        <Grid container justify="center" alignItems="center" style={{margin:'20px auto', width:'90%'}}>
             {
                 (signChoise) ?
                     (

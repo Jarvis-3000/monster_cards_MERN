@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -55,6 +55,39 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp({handleSignChoise}) {
     const classes = useStyles();
 
+    const [firstName, setFirstName]=useState('')
+    const [lastName, setLastName]=useState('')
+    const [email, setEmail]=useState('')
+    const [password, setPassword]=useState('')
+    const [allowExtraEmails, setAllowExtraEmails]=useState(false)
+
+    const handleFirstName=(e)=>{
+        setFirstName(e.target.value)
+    }
+
+    const handleLastName=(e)=>{
+        setLastName(e.target.value)
+    }
+
+    const handleEmail=(e)=>{
+        setEmail(e.target.value)
+    }
+
+    const handlePassword=(e)=>{
+        setPassword(e.target.value)
+    }
+
+    const handleAllowExtraEmails=()=>{
+        setAllowExtraEmails(prevState=>{
+            return !prevState
+        })
+    }
+
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+        console.log({firstName,lastName,email,password,allowExtraEmails})
+    }
+
     return (
         <Container component="main" maxWidth="xs" className={classes.container}>
             {/* <CssBaseline /> */}
@@ -65,7 +98,7 @@ export default function SignUp({handleSignChoise}) {
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate method="POST">
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -77,6 +110,8 @@ export default function SignUp({handleSignChoise}) {
                                 id="firstName"
                                 label="First Name"
                                 autoFocus
+                                value={firstName}
+                                onChange={handleFirstName}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -88,6 +123,8 @@ export default function SignUp({handleSignChoise}) {
                                 label="Last Name"
                                 name="lastName"
                                 autoComplete="lname"
+                                value={lastName}
+                                onChange={handleLastName}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -99,6 +136,8 @@ export default function SignUp({handleSignChoise}) {
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
+                                value={email}
+                                onChange={handleEmail}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -111,11 +150,13 @@ export default function SignUp({handleSignChoise}) {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                value={password}
+                                onChange={handlePassword}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                                control={<Checkbox value={allowExtraEmails} color="primary" onChange={handleAllowExtraEmails}/>}
                                 label="I want to receive inspiration, marketing promotions and updates via email."
                             />
                         </Grid>
@@ -126,6 +167,7 @@ export default function SignUp({handleSignChoise}) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={handleSubmit}
                     >
                         Sign Up
                     </Button>

@@ -3,9 +3,8 @@ import axios from "axios"
 
 export const editName=(payload)=>{
     return (dispatch)=>{
-        console.log("editing...")
         //editing execution...
-        return dispatch({type:actionTypes.EDIT_NAME, payload})
+        return dispatch({type:actionTypes.EDIT_NAME,payload})
     }
 }
 

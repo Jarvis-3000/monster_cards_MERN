@@ -34,7 +34,7 @@ function Reducer(state=INITIAL_STATE, action){
         case actionTypes.EDIT_NAME:
             return{
                 ...state,
-                monsters:editMonsters({...state.monsters,...action.payload})
+                monsters:editMonsters({...state,...action.payload})
             }
 
         default:

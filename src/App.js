@@ -1,6 +1,6 @@
 import React from "react"
 import { useState, useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import * as actions from "./redux/actions"
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core"
@@ -37,28 +37,28 @@ const Theme=createMuiTheme({
 function App(){
 
     const classes=useStyles() //styling
-    const dispatch=useDispatch()           //useDispatchh() for dispatching an action
+    const dispatch=useDispatch()           //useDispatch() for dispatching an action
+    const { monsters, fetchState } = useSelector(state => state)    //useSelector() for getting the
 
-    const [monsters2, setMonsters]=useState([])
-    // const [filterdMonsters, setFilteredMonsters]=useState([])
-    // const [searchString, setSearchString]=useState('')
+    const [filterdMonsters, setFilteredMonsters]=useState([])
+    const [searchString, setSearchString]=useState('')
 
-    // const handleSearchString=(e)=>{
-    //     // useState does not support second callback
-    //     // but for being up to date with state , use prevState just like class lifecycle
-    //     setSearchString(prevSearchString=>e.target.value)
+    const handleSearchString=(e)=>{
+        // useState does not support second callback
+        // but for being up to date with state , use prevState just like class lifecycle
+        setSearchString(prevSearchString=>e.target.value)
         
-    // }
+    }
 
     // for frtching the data from api 
 
-    // const handleFilterdMonsters=()=>{
-    //     let filtered=monsters2.filter(monster=>
-    //         (monster.name.toLowerCase().includes(searchString.toLowerCase())) 
-    //     )
-    //     // console.log(filtered)
-    //     setFilteredMonsters(filtered)
-    // }
+    const handleFilterdMonsters=()=>{
+        let filtered=monsters.filter(monster=>
+            (monster.name.toLowerCase().includes(searchString.toLowerCase())) 
+        )
+        // console.log(filtered)
+        setFilteredMonsters(filtered)
+    }
 
     useEffect(()=>{
         console.log("dispatching addUsers")
@@ -69,11 +69,11 @@ function App(){
     // so that the callback only runs on component's first load.
 
 
-    // useEffect(()=>{
-    //     console.log("monsters",monsters2)
-    //     // handleFilterdMonsters()
-    //     // console.log("filteredMonsters",filterdMonsters)
-    // },[monsters2, searchString])
+    useEffect(()=>{
+        console.log("monsters",monsters)
+        handleFilterdMonsters()
+        // console.log("filteredMonsters",filterdMonsters)
+    },[monsters, searchString])
     //second param/[] is callled dependencied
     //These dependencies specify on which cases useEffect should respond to a component being updated.
 
@@ -81,9 +81,8 @@ function App(){
     return (
         <ThemeProvider theme={Theme}>
             <div className={classes.app}>
-                {/* <SearchBox handleSearchString={handleSearchString} /> */}
-                {/* <MonsterList monsters={filterdMonsters}/> */}
-                <MonsterList monsters={monsters2}/>
+                <SearchBox handleSearchString={handleSearchString} />
+                <MonsterList monsters={filterdMonsters} fetchState={fetchState}/>
             </div>
         </ThemeProvider>
     )

@@ -4,24 +4,8 @@ const useStyles=makeStyles({
     monsterList:{
         margin:'auto',
         width:'90%',
-        padding:'5px',
-        // display: 'flex',
-        // flexWrap: 'wrap',
-        // justifyContent: 'space-between',
-        // alignItems: 'stretch',
+        padding:'5px'
         
-    },
-    
-    monster:{
-        padding:'5px',
-        // width:'300px',
-        height:'fitContent',
-        backgroundImage:'linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);',
-        border: '2px solid black',
-        borderRadius:'5px',
-        display: 'flex',
-        flexDirection: 'column',
-        wordWrap: 'breakWord',
     }
 })
 

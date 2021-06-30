@@ -20,51 +20,31 @@ function SearchBox({ handleSearchString }) {
     return (
         <>
             <Typography
-                style={{ marginBottom:'10px' }}
+                style={{marginBottom:'10px' }}
                 variant="h3"
                 // color="error"
             >
                 <Box 
-                    style={{ margin:'0px 0px 10px' , fontSize:"70px"}} 
+                    style={{ padding:'5px', margin:'0px 0px 10px' , fontSize:"40px"}} 
                     bgcolor="primary.main"
                 >
                     Search Monster
                 </Box>
-                
+
                 <Box
-                    style={{ margin:'0px 50px 10px' , fontSize:"60px" }} 
+                    style={{ padding:'5px', margin:'0px 50px 10px' , fontSize:"30px" }} 
                     bgcolor="secondary.main"
                 >
                     Search Monster
                 </Box>
                 
                 <Box 
-                    style={{ margin:'0px 100px 10px' , fontSize:"50px" }} 
+                    style={{ padding:'5px', margin:'0px 100px 10px' , fontSize:"20px" }} 
                     bgcolor="error.main"
                 >
                     Search Monster
                 </Box>
                 
-                <Box 
-                    style={{ margin:'0px 150px 10px' , fontSize:"40px" }} 
-                    bgcolor="info.main"
-                >
-                    Search Monster
-                </Box>
-                
-                <Box 
-                    style={{ margin:'0px 200px 10px' , fontSize:"30px" }} 
-                    bgcolor="warning.main"
-                >
-                    Search Monster
-                </Box>
-                
-                <Box 
-                    style={{ margin:'0px 250px 10px' , fontSize:"20px" }} 
-                    bgcolor="success.main"
-                >
-                    Search Monster
-                </Box>
                 
             </Typography>
 
@@ -82,7 +62,6 @@ function SearchBox({ handleSearchString }) {
                 />
 
                 <Button
-                    href="#"
                     variant="contained"
                     // color="primary"
                     disableElevation
@@ -90,7 +69,7 @@ function SearchBox({ handleSearchString }) {
                     size="large"
                     fullWidth="true"
                     className={classes.btn}
-                // style={{ margin: '10px' }}
+                // style={{ padding:'5px', margin: '10px' }}
                 >Submit</Button>
 
                 <div className={classes.upload}>

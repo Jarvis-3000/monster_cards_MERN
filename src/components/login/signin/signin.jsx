@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -55,17 +55,40 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn({handleSignChoise}) {
     const classes = useStyles();
 
+    const [email, setEmail]=useState('')
+    const [password, setPassword]=useState('')
+    const [remember, setRemember]=useState(false)
+
+    const handleEmail=(e)=>{
+        setEmail(e.target.value)
+    }
+
+    const handlePassword=(e)=>{
+        setPassword(e.target.value)
+    }
+
+    const handleRemember=()=>{
+        setRemember(prevState=>{
+            return !prevState
+        })
+    }
+
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+        console.log({email,password,remember})
+    }
+
     return (
         <Container component="main" maxWidth="xs" className={classes.container}>
             {/* <CssBaseline /> */}
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
+                    <LockOutlinedIcon />    
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate method="POST">
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -76,6 +99,8 @@ export default function SignIn({handleSignChoise}) {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        value={email}
+                        onChange={handleEmail}
                     />
                     <TextField
                         variant="outlined"
@@ -87,9 +112,11 @@ export default function SignIn({handleSignChoise}) {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        value={password}
+                        onChange={handlePassword}
                     />
                     <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
+                        control={<Checkbox value={remember} color="primary" onChange={handleRemember}/>}
                         label="Remember me"
                     />
                     <Button
@@ -98,6 +125,7 @@ export default function SignIn({handleSignChoise}) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={handleSubmit}
                     >
                         Sign In
                     </Button>
