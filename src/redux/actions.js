@@ -1,9 +1,10 @@
 import * as actionTypes from "./actionsTypes"
 
 export const editName=(payload)=>{
-    return{
-        type:actionTypes.editName,
-        payload
+    return (dispatch)=>{
+        console.log("editing...")
+        //editing execution...
+        return dispatch({type:actionTypes.editName, payload})
     }
 }
 
