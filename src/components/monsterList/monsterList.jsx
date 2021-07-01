@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 
 // styles
 import useStyles from "./style.monsterList"
@@ -14,17 +14,22 @@ import MonsterCard from "../monsterCard/monsterCard"
 
 function MonsterList(props) {
     const classes = useStyles()   //for getting all the style
+    const [fetchStatus, setFetchState]=useState('')
 
     const { monsters, fetchState } = props
+
+    useEffect(()=>{
+        setFetchState(fetchState)
+    },[monsters])
 
     return (
         <>
             {
-                function (fetchState) {
-                    if (fetchState === 'fetching...') {
+                function (fetchStatus) {
+                    if (fetchStatus === 'fetching...') {
                         return <CircularProgress style={{ color: 'blue' }} />
                     }
-                    else if (fetchState === 'failed') {
+                    else if (fetchStatus === 'failed') {
                         return <WarningIcon fontSize="large" style={{ color: 'red' }} />
                     }
                     else {
@@ -38,7 +43,7 @@ function MonsterList(props) {
                             </Grid>
                         )
                     }
-                }(fetchState)
+                }(fetchStatus)
             }
         </>
     )

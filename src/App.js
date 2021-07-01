@@ -1,7 +1,7 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import * as actions from "./redux/actions"
+import * as actions from "./redux/dataFunctions/actions"
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core"
 //styles
@@ -38,7 +38,7 @@ function App(){
 
     const classes=useStyles() //styling
     const dispatch=useDispatch()           //useDispatch() for dispatching an action
-    const { monsters, fetchState } = useSelector(state => state)    //useSelector() for getting the
+    const { monsters, fetchState } = useSelector(state => state.monsters)    //useSelector() for getting the
 
     const [filterdMonsters, setFilteredMonsters]=useState([])
     const [searchString, setSearchString]=useState('')
@@ -62,7 +62,7 @@ function App(){
 
     useEffect(()=>{
         console.log("dispatching addUsers")
-        dispatch(actions.addUsers())
+        dispatch(actions.addMonsters())
     },[])
     //never leave second argument emepty else it will cause endless loop
     // We passed in an empty array to useEffect as the 2nd argument 

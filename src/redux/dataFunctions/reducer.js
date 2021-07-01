@@ -8,23 +8,23 @@ const INITIAL_STATE={
 }
 
 
-function Reducer(state=INITIAL_STATE, action){
+function monstersReducer(state=INITIAL_STATE, action){
     switch(action.type){
 
-        case actionTypes.FETCH_USERS_REQUEST:
+        case actionTypes.FETCH_MONSTERS_REQUEST:
             return {
                 ...state,
                 fetchState:'fetching...'
             }
 
-        case actionTypes.FETCH_USERS_SUCCESS:
+        case actionTypes.FETCH_MONSTERS_SUCCESS:
             return{
                 ...state,
                 monsters:action.payload,
                 fetchState:'success'
             }
                    
-        case actionTypes.FETCH_USERS_FAILED:
+        case actionTypes.FETCH_MONSTERS_FAILED:
             return {
                 ...state,
                 fetchState:'failed',
@@ -42,4 +42,4 @@ function Reducer(state=INITIAL_STATE, action){
     }
 }
 
-export default Reducer
+export default monstersReducer

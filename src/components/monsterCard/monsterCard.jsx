@@ -1,6 +1,6 @@
 import React from "react"
-import {useDispatch } from "react-redux"
-import { editName } from "../../redux/actions"
+import {useSelector, useDispatch } from "react-redux"
+import { editName, addMonsters } from "../../redux/dataFunctions/actions"
 
 // styles
 import useStyles from "./style.monsterCard"
@@ -11,15 +11,35 @@ import { Grid, Paper, Box, Typography } from "@material-ui/core"
 //component
 import FormDialog from "../formDialog/formDialog"
 
+import axios from "axios"
+
 
 
 export default  function MonsterCard({monster}){
     const classes = useStyles()   //for getting all the style
     const dispatch = useDispatch()
 
-    function handleEdit(id, input) {
+    const {loggedIn} =  useSelector(state=>state.user)
+
+
+
+    async function handleEdit(id, input) {
+
+        if(!loggedIn){
+            alert("Please first login")
+            return 0
+        }
+
         console.log("dispatching editName...", id, input)
-        dispatch(editName({ id, input }))
+        try{
+            const res= await axios.put("http://localhost:5000/monsters/editmonster",{id,input})
+            console.log(res)
+            dispatch(addMonsters())
+        }
+        catch(err){
+            console.log(err)
+        }
+
     }
 
     return (
@@ -37,7 +57,7 @@ export default  function MonsterCard({monster}){
                     </Grid>
 
                     <Grid item xs={2} style={{ padding: '0px 0px 0px 10px' }}>
-                        <FormDialog id={monster.id}
+                        <FormDialog id={monster._id}
                             handleEdit={handleEdit}
                         />
                     </Grid>

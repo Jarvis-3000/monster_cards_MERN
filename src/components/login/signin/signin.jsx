@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import {useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import HandleLoginAxios from '../loginAxios';
+import * as actions from "../../../redux/userFunctions/actions"
 
 function Copyright() {
     return (
@@ -56,6 +60,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn({handleSignChoise}) {
     const classes = useStyles();
+    const dispatch = useDispatch()
+    const history = useHistory()
 
     const [email, setEmail]=useState('')
     const [password, setPassword]=useState('')
@@ -75,8 +81,6 @@ export default function SignIn({handleSignChoise}) {
         })
     }
 
-    
-
     const handleSubmit=async(e)=>{
         e.preventDefault()
         
@@ -85,7 +89,31 @@ export default function SignIn({handleSignChoise}) {
         const crendentials={email,password}
 
         const res=await HandleLoginAxios(url, crendentials)
-        alert(res.msg)
+        if(res.status===200){
+            dispatch(actions.toggleLogin(true))
+            //alert box
+            dispatch(actions.toggleAlert({msg:"Signin Successfull !!!",severity:"success",show:true}))
+            
+            //for hiding the alertBox after 3 seconds
+            setTimeout(()=>{
+                dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
+            },3000)
+            history.replace("/")
+        }
+        else{
+            //alert box
+            dispatch(actions.toggleAlert({msg:res.msg,severity:"error",show:true}))
+            
+            //for hiding the alertBox after 3 seconds
+            setTimeout(()=>{
+                dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
+            },3000)
+        }
+
+        setEmail('')
+        setPassword('')
+        setRemember(false)
+        
     }
 
     return (

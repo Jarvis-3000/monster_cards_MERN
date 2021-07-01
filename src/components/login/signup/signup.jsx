@@ -1,4 +1,6 @@
 import React, {useState} from 'react';
+
+import {useDispatch } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import HandleLoginAxios from '../loginAxios';
+import * as actions from "../../../redux/userFunctions/actions"
 
 function Copyright() {
     return (
@@ -56,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp({handleSignChoise}) {
     const classes = useStyles();
+    const dispatch = useDispatch()
 
     const [firstName, setFirstName]=useState('')
     const [lastName, setLastName]=useState('')
@@ -98,7 +102,31 @@ export default function SignUp({handleSignChoise}) {
         const url="http://localhost:5000/user/register"
 
         const res=await HandleLoginAxios(url, credentials)
-        alert(res.msg)
+        
+        if(res.status===201){
+            //alert box
+            dispatch(actions.toggleAlert({msg:"Registration Successfull !!!",severity:"success",show:true}))
+            
+            //for hiding the alertBox after 3 seconds
+            setTimeout(()=>{
+                dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
+            },3000)
+        }
+        else{
+            //alert box
+            dispatch(actions.toggleAlert({msg:res.msg,severity:"error",show:true}))
+            
+            //for hiding the alertBox after 3 seconds
+            setTimeout(()=>{
+                dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
+            },3000)
+        }
+
+        setFirstName('')
+        setLastName('')
+        setEmail('')
+        setPassword('')
+        setAllowExtraEmails(false)
     }
 
     return (

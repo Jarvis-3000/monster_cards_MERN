@@ -26,8 +26,10 @@ export default function FormDialog({id, handleEdit}) {
 
     }
     else{
-      handleEdit(id,input)
       handleClose()
+      setTimeout(()=>{
+        handleEdit(id,input)
+      },1)
     }
   }
 

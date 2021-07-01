@@ -8,25 +8,18 @@ export const editName=(payload)=>{
     }
 }
 
-export const toggleSignin=(payload)=>{
-    return{
-        type:actionTypes.TOGGLE_SIGNIN,
-        payload
-    }
-}
-
-export const addUsers=()=>{
+export const addMonsters=()=>{
     return function(dispatch){
-        dispatch({type:actionTypes.FETCH_USERS_REQUEST})
+        dispatch({type:actionTypes.FETCH_MONSTERS_REQUEST})
 
         //fetching execution...
         axios.get("http://localhost:5000/monsters/getmonsters")
         .then(monsters=>{
             console.log(monsters.data)
-            return dispatch({type:actionTypes.FETCH_USERS_SUCCESS, payload:monsters.data.monsters})
+            return dispatch({type:actionTypes.FETCH_MONSTERS_SUCCESS, payload:monsters.data.monsters})
         })
         .catch(err=>{
-            return dispatch({type:actionTypes.FETCH_USERS_FAILED, payload:err })
+            return dispatch({type:actionTypes.FETCH_MONSTERS_FAILED, payload:err })
         })
     }
 }
