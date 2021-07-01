@@ -5,8 +5,16 @@ import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
 
+  container:{
+    width: '100%',
+    position:'fixed',
+    top:'50px',
+    zIndex:2,
+  },
+
   root: {
-    width: '50%',
+    minWidth:'fit-content',
+    maxWidth:'80%',
     margin:'20px auto',
     boxShadow:'1px 1px 5px 1px gray',
     borderRadius:'5px',
@@ -39,10 +47,12 @@ export default function AlertBox() {
 
   if(alertInfo.show){
     return(
-      <div className={classes.root}>
-        <Alert variant="filled" severity={alertInfo.severity} className={classes.alert}>
-          {alertInfo.msg}
-        </Alert>
+      <div className={classes.container}>
+        <div className={classes.root}>
+          <Alert variant="filled" severity={alertInfo.severity} className={classes.alert}>
+            {alertInfo.msg}
+          </Alert>
+        </div>
       </div>
     )
   }

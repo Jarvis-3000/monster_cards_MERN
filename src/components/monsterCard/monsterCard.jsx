@@ -1,6 +1,6 @@
 import React from "react"
 import {useSelector, useDispatch } from "react-redux"
-import { editName, addMonsters } from "../../redux/dataFunctions/actions"
+import { addMonsters } from "../../redux/dataFunctions/actions"
 
 // styles
 import useStyles from "./style.monsterCard"
@@ -10,7 +10,7 @@ import { Grid, Paper, Box, Typography } from "@material-ui/core"
 
 //component
 import FormDialog from "../formDialog/formDialog"
-
+import * as actions from "../../redux/userFunctions/actions"
 import axios from "axios"
 
 
@@ -26,7 +26,13 @@ export default  function MonsterCard({monster}){
     async function handleEdit(id, input) {
 
         if(!loggedIn){
-            alert("Please first login")
+            //alert box
+            dispatch(actions.toggleAlert({msg:"Please First SignIn",severity:"warning",show:true}))
+            
+            //for hiding the alertBox after 3 seconds
+            setTimeout(()=>{
+                dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
+            },3000)
             return 0
         }
 
@@ -34,7 +40,15 @@ export default  function MonsterCard({monster}){
         try{
             const res= await axios.put("http://localhost:5000/monsters/editmonster",{id,input})
             console.log(res)
-            dispatch(addMonsters())
+            await dispatch(addMonsters())
+
+            //alert box
+            dispatch(actions.toggleAlert({msg:"Successfully Edited Name !!!",severity:"success",show:true}))
+            
+            //for hiding the alertBox after 3 seconds
+            setTimeout(()=>{
+                dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
+            },3000)
         }
         catch(err){
             console.log(err)
