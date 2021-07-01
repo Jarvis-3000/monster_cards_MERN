@@ -23,14 +23,14 @@ export default  function MonsterCard({monster}){
     }
 
     return (
-        <Grid item xl={2} lg={3} md={4} sm={6} xs={12} key={monster.id}>
+        <Grid item xl={2} lg={3} md={4} sm={6} xs={12}>
             <Paper className={classes.monster}>
                 <img width="100%" height="100%" src={`https://robohash.org/${monster.id}?set=set2`} alt="monsterImage" />
 
                 <Grid container direction="row" justify="space-between" alignItems="center" style={{ padding: '10px' }}>
                     <Grid item xs={10}>
                         <Typography variant="h6" align="center" display="block" noWrap>
-                            <Box gutterBottom >
+                            <Box>
                                 {monster.name}
                             </Box>
                         </Typography>

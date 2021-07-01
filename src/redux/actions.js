@@ -20,10 +20,10 @@ export const addUsers=()=>{
         dispatch({type:actionTypes.FETCH_USERS_REQUEST})
 
         //fetching execution...
-        axios.get("https://jsonplaceholder.typicode.com/users")
-        .then(users=>{
-            console.log(users.data)
-            return dispatch({type:actionTypes.FETCH_USERS_SUCCESS, payload:users.data})
+        axios.get("http://localhost:5000/monsters/getmonsters")
+        .then(monsters=>{
+            console.log(monsters.data)
+            return dispatch({type:actionTypes.FETCH_USERS_SUCCESS, payload:monsters.data.monsters})
         })
         .catch(err=>{
             return dispatch({type:actionTypes.FETCH_USERS_FAILED, payload:err })

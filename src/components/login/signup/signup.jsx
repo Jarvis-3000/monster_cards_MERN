@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import HandleLoginAxios from '../loginAxios';
+
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -83,9 +85,20 @@ export default function SignUp({handleSignChoise}) {
         })
     }
 
-    const handleSubmit=(e)=>{
+    const handleSubmit=async(e)=>{
         e.preventDefault()
-        console.log({firstName,lastName,email,password,allowExtraEmails})
+
+        //signup...
+        const credentials={
+            firstname:firstName,
+            lastname:lastName,
+            email,
+            password,
+        }
+        const url="http://localhost:5000/user/register"
+
+        const res=await HandleLoginAxios(url, credentials)
+        alert(res.msg)
     }
 
     return (

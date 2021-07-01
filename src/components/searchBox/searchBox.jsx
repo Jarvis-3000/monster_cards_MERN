@@ -55,7 +55,7 @@ function SearchBox({ handleSearchString }) {
                     placeholder="Search Monster..."
                     // label="search monster" InputLabelProps={{shrink: true}}
                     type="text"
-                    color='secondary' error autoComplete
+                    color='secondary'
                     autoFocus
                     // variant="outlined"
                     onChange={handleSearchString}
@@ -67,7 +67,7 @@ function SearchBox({ handleSearchString }) {
                     disableElevation
                     // disableRipple
                     size="large"
-                    fullWidth="true"
+                    fullWidth
                     className={classes.btn}
                 // style={{ padding:'5px', margin: '10px' }}
                 >Submit</Button>
@@ -100,7 +100,6 @@ function SearchBox({ handleSearchString }) {
                             accept="image/*"
                             id="uploadIcon"
                             type="file"
-                            single
                             className={classes.input}
                         // style={{display:'none'}}
                         />

@@ -11,3 +11,7 @@ https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/
     * no colors from (error, warning, info)
 
     These colors are only accessible in <Box bgcolor="warning.main"></Box> component in primary.main format
+
+# Status Codes
+    https://aloneonahill.com/blog/http-status-codes/#:~:text=A%20403%20status%20code%20indicates%20that%20the%20client,what%20was%20being%20asked.%20404%20-%20Not%20Found
+    

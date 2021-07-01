@@ -32,7 +32,7 @@ function MonsterList(props) {
                             <Grid container spacing={3} className={classes.monsterList}>
                                 { 
                                     monsters.map(monster => {
-                                       return <MonsterCard monster={monster}/>
+                                       return <MonsterCard key={monster.id} monster={monster}/>
                                     })
                                 }
                             </Grid>
