@@ -19,7 +19,7 @@ export default  function MonsterCard({monster}){
     const classes = useStyles()   //for getting all the style
     const dispatch = useDispatch()
 
-    const {loggedIn} =  useSelector(state=>state.user)
+    const {loggedIn,token} =  useSelector(state=>state.user)
 
 
 
@@ -32,14 +32,14 @@ export default  function MonsterCard({monster}){
             //for hiding the alertBox after 3 seconds
             setTimeout(()=>{
                 dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
-            },3000)
+            },2000)
             return 0
         }
 
-        console.log("dispatching editName...", id, input)
+        // console.log("dispatching editName...", id, input)
         try{
-            const res= await axios.put("http://localhost:5000/monsters/editmonster",{id,input})
-            console.log(res)
+            const res= await axios.put("https://monster-cards-mern-backend.herokuapp.com/monsters/editmonster",{id,input,token})
+            // console.log({...res})
             await dispatch(addMonsters())
 
             //alert box
@@ -48,10 +48,16 @@ export default  function MonsterCard({monster}){
             //for hiding the alertBox after 3 seconds
             setTimeout(()=>{
                 dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
-            },3000)
+            },2000)
         }
         catch(err){
-            console.log(err)
+            //alert box
+            dispatch(actions.toggleAlert({msg:err.response.statusText,severity:"error",show:true}))
+            
+            // //for hiding the alertBox after 3 seconds
+            setTimeout(()=>{
+                dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
+            },2000)
         }
 
     }

@@ -2,9 +2,9 @@ import axios from "axios"
 
 const HandleLoginAxios=async(url, credentials)=>{
     try{
-        console.log("aaja",credentials)
+        // console.log("aaja",credentials)
         const res=await axios.post(url,credentials)
-        console.log("status",res.status)
+        // console.log("status",res.status)
         if(res.status===200){
             return {msg:"Login Successfull !!!",...res}
         }
@@ -14,7 +14,7 @@ const HandleLoginAxios=async(url, credentials)=>{
         }
     } 
     catch(err){
-        console.log({...err})
+        // console.log({...err})
         if(err.response.status===400){
             return {msg:"User Already Exists ",...err}
         }

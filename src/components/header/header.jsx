@@ -18,7 +18,17 @@ function Header() {
 
     const { loggedIn } = useSelector(state => state.user)
 
+    const deleteCookies=(name)=>{
+        document.cookie=`${name}=; max-age=0`
+        console.log(document.cookie)
+        
+    }
+
     const handleSignOut = () => {
+        
+        //delete cookie
+        deleteCookies("token")
+
         dispatch(actions.toggleLogin(false))
         //alert box
         dispatch(actions.toggleAlert({ msg: "Logout Successfully", severity: "success", show: true }))

@@ -99,7 +99,7 @@ export default function SignUp({handleSignChoise}) {
             email,
             password,
         }
-        const url="http://localhost:5000/user/register"
+        const url="https://monster-cards-mern-backend.herokuapp.com/user/register"
 
         const res=await HandleLoginAxios(url, credentials)
         
@@ -110,7 +110,7 @@ export default function SignUp({handleSignChoise}) {
             //for hiding the alertBox after 3 seconds
             setTimeout(()=>{
                 dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
-            },3000)
+            },2000)
         }
         else{
             //alert box
@@ -119,7 +119,7 @@ export default function SignUp({handleSignChoise}) {
             //for hiding the alertBox after 3 seconds
             setTimeout(()=>{
                 dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
-            },3000)
+            },2000)
         }
 
         setFirstName('')

@@ -1,22 +1,23 @@
-import React, {useState} from 'react';
-import {useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import React, {useState} from 'react'
+import {useDispatch } from 'react-redux'
+import { useHistory } from 'react-router'
+// import { useCookies } from 'react-cookie'    //no need this document.cookie="" is enough
 
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import TextField from '@material-ui/core/TextField'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
+import Link from '@material-ui/core/Link'
+import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container'
 
-import HandleLoginAxios from '../loginAxios';
+import HandleLoginAxios from '../loginAxios'
 import * as actions from "../../../redux/userFunctions/actions"
 
 function Copyright() {
@@ -29,7 +30,7 @@ function Copyright() {
             {new Date().getFullYear()}
             {'.'}
         </Typography>
-    );
+    )
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -56,12 +57,13 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
-}));
+}))
 
 export default function SignIn({handleSignChoise}) {
-    const classes = useStyles();
+    const classes = useStyles()
     const dispatch = useDispatch()
     const history = useHistory()
+    // const [cookies, setCookie] = useCookies(['token']);
 
     const [email, setEmail]=useState('')
     const [password, setPassword]=useState('')
@@ -81,23 +83,35 @@ export default function SignIn({handleSignChoise}) {
         })
     }
 
+    const setCookies = (token) => {
+        return document.cookie=`token=${token}`
+        
+    }
+    
     const handleSubmit=async(e)=>{
         e.preventDefault()
         
         //signing...
-        const url="http://localhost:5000/user/login"
+        const url="https://monster-cards-mern-backend.herokuapp.com/user/login"
         const crendentials={email,password}
 
         const res=await HandleLoginAxios(url, crendentials)
         if(res.status===200){
             dispatch(actions.toggleLogin(true))
             //alert box
+            const token = res.data.token
+            
+            //save token in browser cookies
+            setCookies(token)
+            //save token  in redux
+            dispatch(actions.saveToken(token))
+
             dispatch(actions.toggleAlert({msg:"Signin Successfull !!!",severity:"success",show:true}))
             
             //for hiding the alertBox after 3 seconds
             setTimeout(()=>{
                 dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
-            },3000)
+            },2000)
             history.replace("/")
         }
         else{
@@ -107,7 +121,7 @@ export default function SignIn({handleSignChoise}) {
             //for hiding the alertBox after 3 seconds
             setTimeout(()=>{
                 dispatch(actions.toggleAlert({msg:"",severity:"",show:false}))
-            },3000)
+            },2000)
         }
 
         setEmail('')
@@ -187,5 +201,5 @@ export default function SignIn({handleSignChoise}) {
             </div>
 
         </Container>
-    );
+    )
 }

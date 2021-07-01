@@ -13,3 +13,10 @@ export const toggleAlert = (payload) =>{
         payload
     }
 }
+
+export const saveToken = (payload)=>{
+    return{
+        type:actionTypes.SAVE_TOKEN,
+        payload
+    }
+}

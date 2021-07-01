@@ -6,7 +6,8 @@ const INITIAL_STATE = {
         msg:'',
         severity:'',
         show:false
-    }
+    },
+    token:''
 }
 
 export default function userReducer(state=INITIAL_STATE, action){
@@ -25,6 +26,13 @@ export default function userReducer(state=INITIAL_STATE, action){
                 alertInfo:action.payload
 
             }
+        
+        case actionTypes.SAVE_TOKEN:
+            return{
+                ...state,
+                token:action.payload
+            }
+            
         default :
             return state
     }

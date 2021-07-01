@@ -24,6 +24,10 @@
     });
 
 
+# Issue
+    1. Even after implementing persistor for saving data in localStorage, it is not saving !
+    2. Every time monster list is refereshing even if I am just changing the route from signin to home !
+
 
 #
 #

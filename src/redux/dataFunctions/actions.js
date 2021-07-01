@@ -13,9 +13,9 @@ export const addMonsters=()=>{
         dispatch({type:actionTypes.FETCH_MONSTERS_REQUEST})
 
         //fetching execution...
-        axios.get("http://localhost:5000/monsters/getmonsters")
+        axios.get("https://monster-cards-mern-backend.herokuapp.com/monsters/getmonsters")
         .then(monsters=>{
-            console.log(monsters.data)
+            // console.log(monsters.data)
             return dispatch({type:actionTypes.FETCH_MONSTERS_SUCCESS, payload:monsters.data.monsters})
         })
         .catch(err=>{

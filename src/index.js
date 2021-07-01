@@ -14,17 +14,20 @@ import "./index.css"
 
 import {PersistGate} from "redux-persist/integration/react"
 import {persistor,store} from "./redux/store"
+import { CookiesProvider } from "react-cookie";
 
 ReactDOM.render(
     <Provider store={store}>
         <PersistGate persistor={persistor}>
-            <BrowserRouter>
-                <Header />
-                <Switch>
-                    <Route exact path="/" component={App} />
-                    <Route exact path="/signin" component={LoginPage} />
-                </Switch>
-            </BrowserRouter>
+            <CookiesProvider>
+                <BrowserRouter>
+                    <Header />
+                    <Switch>
+                        <Route exact path="/" component={App} />
+                        <Route exact path="/signin" component={LoginPage} />
+                    </Switch>
+                </BrowserRouter>
+            </CookiesProvider>
         </PersistGate>
     </Provider>
 
