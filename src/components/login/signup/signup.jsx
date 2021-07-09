@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 
+
 import {useDispatch } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -17,6 +18,7 @@ import Container from '@material-ui/core/Container';
 
 import HandleLoginAxios from '../loginAxios';
 import * as actions from "../../../redux/userFunctions/actions"
+import config from "../../../config"
 
 function Copyright() {
     return (
@@ -99,7 +101,7 @@ export default function SignUp({handleSignChoise}) {
             email,
             password,
         }
-        const url="https://monster-cards-mern-backend.herokuapp.com/user/register"
+        const url=`${config.fetchUri}/user/register`
 
         const res=await HandleLoginAxios(url, credentials)
         

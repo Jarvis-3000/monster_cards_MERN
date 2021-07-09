@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes"
 import axios from "axios"
+import config from "../../config"
 
 export const editName=(payload)=>{
     return (dispatch)=>{
@@ -9,18 +10,29 @@ export const editName=(payload)=>{
 }
 
 export const addMonsters=()=>{
-    return function(dispatch){
+    return async function(dispatch){
         dispatch({type:actionTypes.FETCH_MONSTERS_REQUEST})
 
+        console.log(config.fetchUri)
         //fetching execution...
-        axios.get("https://monster-cards-mern-backend.herokuapp.com/monsters/getmonsters")
-        .then(monsters=>{
-            // console.log(monsters.data)
-            return dispatch({type:actionTypes.FETCH_MONSTERS_SUCCESS, payload:monsters.data.monsters})
-        })
-        .catch(err=>{
-            return dispatch({type:actionTypes.FETCH_MONSTERS_FAILED, payload:err })
-        })
+        try{
+            const monsters = await axios.get(`${config.fetchUri}/monsters/getmonsters`)
+            dispatch({type:actionTypes.FETCH_MONSTERS_SUCCESS, payload:monsters.data.monsters})
+            await localStorage.setItem("monstersAPI",JSON.stringify(monsters.data.monsters))
+        }
+        catch(err){
+            dispatch({type:actionTypes.FETCH_MONSTERS_FAILED, payload:err })
+        }   
+        
     }
 }
 
+export const getPersistedData=(payload)=>{
+    console.log("part 1.5")
+    return{
+        type:actionTypes.GET_PERSISTED_DATA,
+        payload
+    }
+}
+
+// https://monster-cards-mern-backend.herokuapp.com/monsters/getmonsters"

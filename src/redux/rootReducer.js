@@ -1,18 +1,10 @@
 import {combineReducers} from "redux"
-import {persistReducer} from "redux-persist"
-import storage from "redux-persist/lib/storage"
 
 //reducers
 import monstersReducer from "./dataFunctions/reducer"
 import userReducer from "./userFunctions/reducer"
 
-
-const persistConfig={
-    key:'root',
-    storage,
-    // blackList:['user'],       //only user will not be persisted (stored)
-    whitelist:['userReducer', 'monstersReducer']       // only navigation will be persisted
-}
+console.log("I am in root reducer")
 
 const rootReducer=combineReducers({
     user:userReducer,
@@ -20,4 +12,4 @@ const rootReducer=combineReducers({
 
 })
 
-export default persistReducer(persistConfig,rootReducer)
+export default rootReducer

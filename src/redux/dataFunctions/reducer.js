@@ -4,12 +4,18 @@ import {editMonsters} from "./utils"
 const INITIAL_STATE={
     monsters:[],
     fetchState:'',
-    toggleSignin:false,
 }
 
 
 function monstersReducer(state=INITIAL_STATE, action){
     switch(action.type){
+
+        case actionTypes.GET_PERSISTED_DATA:
+            return{
+                ...state,
+                monsters:action.payload.monsters,
+                fetchState:action.payload.fetchState
+            }
 
         case actionTypes.FETCH_MONSTERS_REQUEST:
             return {

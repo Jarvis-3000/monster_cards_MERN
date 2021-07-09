@@ -14,7 +14,11 @@ const HandleLoginAxios=async(url, credentials)=>{
         }
     } 
     catch(err){
-        // console.log({...err})
+        console.log("Err",{...err})
+        if(!navigator.onLine)
+        {
+            return {msg:"You Are Offline"}
+        }
         if(err.response.status===400){
             return {msg:"User Already Exists ",...err}
         }

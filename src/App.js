@@ -40,7 +40,11 @@ function App(){
 
     const classes=useStyles() //styling
     const dispatch=useDispatch()           //useDispatch() for dispatching an action
-    const { monsters, fetchState } = useSelector(state => state.monsters)    //useSelector() for getting the
+
+    const monstersState=useSelector(state=>state.monsters)
+    const userState=useSelector(state=>state.user)
+    const { monsters, fetchState} = useSelector(state => state.monsters)    //useSelector() for getting the
+    const [bool, setBool] =useState(false)
 
     const [filterdMonsters, setFilteredMonsters]=useState([])
     const [searchString, setSearchString]=useState('')
@@ -82,23 +86,61 @@ function App(){
         return null;
     }
 
-    useEffect(()=>{
-        // console.log("dispatching addUsers")
-        dispatch(actions.addMonsters())
-
-        const token=getCookies("token")
-        
-        if(token){
-            dispatch(userActions.saveToken(token))
-            dispatch(userActions.toggleLogin(true))
+    //get persisted data
+    const getPersistedData=async()=>{
+        const monstersState =await JSON.parse(localStorage.getItem("monstersState"))
+        if(monstersState){
+            await dispatch(actions.getPersistedData(monstersState))  
         }
+        else{
+            console.log("error on konstersState")
+        }
+        
+    }
+
+    //getting problems one dispatch is making undefined of other reducers data
+
+    // const getPersistedDataUser=async()=>{
+    //     const userState = await JSON.parse(localStorage.getItem("userState"))
+    //     console.log("userssss",userState)
+    //     if(userState){
+    //         await dispatch(userActions.getPersistedData(userState))
+    //     }
+    // }
+
+    useEffect(()=>{
+
+            if(!navigator.onLine){
+                getPersistedData()
+                // getPersistedDataUser()
+            }
+            else{
+                dispatch(actions.addMonsters())            
+            }
+
+            const token=getCookies("token")
+            if(token){
+                dispatch(userActions.saveToken(token))
+                dispatch(userActions.toggleLogin(true))
+            }
             console.log("app token",token)
+
     },[])
     //never leave second argument emepty else it will cause endless loop
     // We passed in an empty array to useEffect as the 2nd argument 
     // so that the callback only runs on component's first load.
 
 
+    useEffect( ()=>{
+        console.log("part5")
+        console.log("monsterststae",monstersState)
+        console.log("userststae",userState)
+
+        localStorage.setItem("monstersState", JSON.stringify(monstersState))
+        localStorage.setItem("userState", JSON.stringify(userState))
+    },[monstersState, userState])
+
+ 
     useEffect(()=>{
         // console.log("monsters",monsters)
         handleFilterdMonsters()
@@ -107,7 +149,7 @@ function App(){
     //second param/[] is callled dependencied
     //These dependencies specify on which cases useEffect should respond to a component being updated.
 
- 
+
     return (
         <ThemeProvider theme={Theme}>
             <div className={classes.app}>

@@ -14,6 +14,12 @@ export default function userReducer(state=INITIAL_STATE, action){
 
     switch(action.type){
 
+        case actionTypes.GET_PERSISTED_DATA:
+            return{
+                ...state,
+                loggedIn:false
+            }
+
         case actionTypes.TOGGLE_LOGIN:
             return {
                 ...state,

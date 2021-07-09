@@ -20,3 +20,11 @@ export const saveToken = (payload)=>{
         payload
     }
 }
+
+export const getPersistedData=(payload)=>{
+    console.log("part3.5")
+    return{
+        type:actionTypes.GET_PERSISTED_DATA,
+        payload
+    }
+}

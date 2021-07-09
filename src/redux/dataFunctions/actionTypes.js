@@ -4,3 +4,5 @@ export const FETCH_MONSTERS_SUCCESS='fetchMonstersSuccess'
 export const FETCH_MONSTERS_FAILED='fetchMonstersFailed'
 
 export const EDIT_NAME = 'editName'
+
+export const GET_PERSISTED_DATA = 'getPersistedData'

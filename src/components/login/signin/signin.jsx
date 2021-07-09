@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
+import config from "../../../config"
 // import { useCookies } from 'react-cookie'    //no need this document.cookie="" is enough
 
 import Avatar from '@material-ui/core/Avatar'
@@ -92,7 +93,7 @@ export default function SignIn({handleSignChoise}) {
         e.preventDefault()
         
         //signing...
-        const url="https://monster-cards-mern-backend.herokuapp.com/user/login"
+        const url=`${config.fetchUri}/user/login`
         const crendentials={email,password}
 
         const res=await HandleLoginAxios(url, crendentials)

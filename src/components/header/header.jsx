@@ -39,11 +39,22 @@ function Header() {
         }, 3000)
     }
 
+    const giveImgSrc=()=>{
+        if(navigator.onLine){
+            console.log("i am online")
+            return MonsterIcon
+        }
+        else {
+            console.log("i am offline")
+            return `./monster.png`
+        }
+    }
+
     return (
-        <>
-            <Grid container spacing={3} justify="space-between" direction="row" alignItems="center" style={{ padding: '10px', marginBottom: '10px' }}>
+        <div>
+            <Grid container justify="space-between" direction="row" alignItems="center" style={{ padding: '10px', marginBottom: '10px' }}>
                 <Grid item >
-                    <img width="50px" height="50px" src={MonsterIcon} alt="monsterIcon" />
+                    <img width="50px" height="50px" src={giveImgSrc()} alt="monsterIcon" />
 
                 </Grid>
                 <Grid item container xs spacing={3} justify="flex-end" direction="row" alignItems="center">
@@ -52,7 +63,7 @@ function Header() {
                             Home
                         </Button>
                     </Grid>
-
+                    
                     <Grid item>
                         {
                             (!loggedIn) ?
@@ -74,7 +85,7 @@ function Header() {
             </Grid>
 
             <AlertBox />
-        </>
+        </div>
     )
 }
 

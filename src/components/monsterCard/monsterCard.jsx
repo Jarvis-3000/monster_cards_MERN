@@ -12,7 +12,7 @@ import { Grid, Paper, Box, Typography } from "@material-ui/core"
 import FormDialog from "../formDialog/formDialog"
 import * as actions from "../../redux/userFunctions/actions"
 import axios from "axios"
-
+import config from "../../config"
 
 
 export default  function MonsterCard({monster}){
@@ -38,7 +38,7 @@ export default  function MonsterCard({monster}){
 
         // console.log("dispatching editName...", id, input)
         try{
-            const res= await axios.put("https://monster-cards-mern-backend.herokuapp.com/monsters/editmonster",{id,input,token})
+            const res= await axios.put(`${config.fetchUri}/monsters/editmonster`,{id,input,token})
             // console.log({...res})
             await dispatch(addMonsters())
 
@@ -62,10 +62,21 @@ export default  function MonsterCard({monster}){
 
     }
 
+    const giveImgSrc=()=>{
+        if(navigator.onLine){
+            console.log("i am online")
+            return `https://robohash.org/${monster.id}?set=set2`
+        }
+        else {
+            console.log("i am offline")
+            return `./monster.png`
+        }
+    }
+
     return (
         <Grid item xl={2} lg={3} md={4} sm={6} xs={12}>
             <Paper className={classes.monster}>
-                <img width="100%" height="100%" src={`https://robohash.org/${monster.id}?set=set2`} alt="monsterImage" />
+                <img width="100%" height="90%" src={giveImgSrc()} alt="monsterImage" />
 
                 <Grid container direction="row" justify="space-between" alignItems="center" style={{ padding: '10px' }}>
                     <Grid item xs={10}>
